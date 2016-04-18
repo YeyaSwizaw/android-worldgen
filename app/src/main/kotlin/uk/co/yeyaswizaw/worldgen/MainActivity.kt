@@ -3,9 +3,8 @@ package uk.co.yeyaswizaw.worldgen
 import android.app.Activity
 import android.opengl.GLSurfaceView
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import java.util.*
+import java.util.Random
 
 class MainActivity : Activity() {
     private var surface: GLSurfaceView? = null
@@ -16,9 +15,11 @@ class MainActivity : Activity() {
 
         // Load native library
         System.loadLibrary("native")
+        Log.D("Native library loaded")
 
         // Set content
         setContentView(R.layout.main_layout)
+        Log.D("Content view set")
 
         // Set opengl surface
         surface = findViewById(R.id.surface) as GLSurfaceView?
@@ -26,6 +27,7 @@ class MainActivity : Activity() {
         surface?.preserveEGLContextOnPause = true
 
         surface?.setRenderer(renderer)
+        Log.D("Surface + renderer set")
     }
 
     override fun onResume() {
@@ -39,7 +41,7 @@ class MainActivity : Activity() {
     }
 
     fun onClick(view: View) {
-        Log.i("Worldgen", "Hello Android World!")
+        Log.I("Hello Android World!")
         Native().hello()
 
         var random = Random()

@@ -5,13 +5,6 @@ import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-class Colour(r: Float, g: Float, b: Float, a: Float = 1.0f) {
-    var r = r
-    var g = g
-    var b = b
-    var a = a
-}
-
 class WorldRenderer : GLSurfaceView.Renderer {
     private var surface_width = -1
     private var surface_height = -1
@@ -27,11 +20,15 @@ class WorldRenderer : GLSurfaceView.Renderer {
         surface_width = width
         surface_height = height
 
+        Log.D("Surface resized to $width x $height")
+
         glViewport(0, 0, surface_width, surface_height)
         glClearColor(background.r, background.g, background.b, background.a)
     }
 
     override fun onDrawFrame(unused: GL10?) {
+        Log.D("Rendering frame")
+
         glClearColor(background.r, background.g, background.b, background.a)
         glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
     }
