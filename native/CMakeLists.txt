@@ -5,7 +5,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -ffor-scope -fno-rtti -fno-ex
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 set(LINKER_FLAGS "${LINKER_FLAGS} -Wl,--as-needed -Wl,--gc-sections -Wl,--no-undefined -Wl,--strip-all -Wl,-rpath-link=${ANDROID_NDK_SYSROOT}/usr/lib/ -L${ANDROID_NDK_SYSROOT}/usr/lib/")
 
-set(SOURCE_FILES src/native.cpp)
+set(SOURCE_FILES
+    src/main.cpp
+    src/native.cpp)
 
 add_library(native SHARED ${SOURCE_FILES})
 target_link_libraries(native log android)

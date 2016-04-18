@@ -2,18 +2,11 @@
 #define NATIVE_NATIVE_HPP
 
 #include <jni.h>
-#include <android/log.h>
 
-#define APP_NAME "Worldgen Native"
+namespace native {
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+void hello(JNIEnv*, jobject);
 
-JNIEXPORT void JNICALL Java_uk_co_yeyaswizaw_worldgen_Native_hello(JNIEnv *, jobject);
-
-#ifdef __cplusplus
 }
-#endif
 
 #endif
