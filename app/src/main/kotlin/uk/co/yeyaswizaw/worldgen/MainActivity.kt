@@ -3,11 +3,11 @@ package uk.co.yeyaswizaw.worldgen
 import android.app.Activity
 import android.opengl.GLSurfaceView
 import android.os.Bundle
-import android.view.View
+import org.jetbrains.anko.*
 import java.util.Random
 
 class MainActivity : Activity() {
-    private var surface: GLSurfaceView? = null
+    private lateinit var surface: GLSurfaceView
     private var renderer = SurfaceRenderer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,34 +18,41 @@ class MainActivity : Activity() {
         Log.D("Native library loaded")
 
         // Set content
-        setContentView(R.layout.main_layout)
+        verticalLayout {
+            surface = gLSurfaceView {
+                setEGLContextClientVersion(2)
+                preserveEGLContextOnPause = true
+                setRenderer(renderer)
+            }.lparams {
+                height = 0
+                weight = 1.0f
+            }
+
+            button(R.string.button_text) {
+                onClick { onButtonClick() }
+            }
+        }
+
         Log.D("Content view set")
-
-        // Set opengl surface
-        surface = findViewById(R.id.surface) as GLSurfaceView?
-        surface?.setEGLContextClientVersion(2)
-        surface?.preserveEGLContextOnPause = true
-
-        surface?.setRenderer(renderer)
         Log.D("Surface + renderer set")
     }
 
     override fun onResume() {
         super.onResume()
-        surface?.onResume()
+        surface.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        surface?.onPause()
+        surface.onPause()
     }
 
-    fun onClick(view: View) {
+    fun onButtonClick() {
         Log.I("Hello Android World!")
         Native().hello()
 
         var random = Random()
         renderer.background = Colour(random.nextFloat(), random.nextFloat(), random.nextFloat())
-        surface?.requestRender()
+        surface.requestRender()
     }
 }
