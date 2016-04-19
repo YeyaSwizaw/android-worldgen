@@ -8,7 +8,7 @@ import java.util.Random
 
 class MainActivity : Activity() {
     private var surface: GLSurfaceView? = null
-    private var renderer: WorldRenderer = WorldRenderer()
+    private var renderer = SurfaceRenderer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
